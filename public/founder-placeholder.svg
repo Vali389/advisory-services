@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" fill="#fed7aa"/>
+  <circle cx="100" cy="75" r="35" fill="#fb923c"/>
+  <ellipse cx="100" cy="165" rx="55" ry="40" fill="#fb923c"/>
+  <text x="100" y="105" font-family="system-ui,sans-serif" font-size="14" fill="white" text-anchor="middle" font-weight="600">GS</text>
+</svg>
