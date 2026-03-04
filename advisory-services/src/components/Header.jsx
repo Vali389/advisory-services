@@ -53,9 +53,9 @@ export default function Header() {
               ))}
             </ul>
           </nav>
-          <Link to="/contact" className="header-cta">
+          {/* <Link to="/contact" className="header-cta">
             Contact
-          </Link>
+          </Link> */}
         </div>
 
         <button

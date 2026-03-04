@@ -178,3 +178,165 @@
     padding: 3.5rem 1.25rem 2.5rem;
   }
 }
+/* --------------------------------------Only made Logo small and good size---------------------------------------------- */
+/* === Modern Professional Footer Enhancement === */
+
+/* Footer background with soft contrast */
+.footer {
+  background: #fafafa;
+  border-top: 3px solid var(--primary);
+  color: #1a1a1a;
+}
+
+/* Better spacing, more premium layout */
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding: 3rem 2rem 2rem;
+  align-items: start; /* keep everything aligned */
+}
+
+/* --- Left Brand Section --- */
+.footer-logo-wrap {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer-logo {
+  height: 70px !important;
+  width: auto !important; /* prevent stretching */
+  object-fit: contain;
+}
+
+.footer-brand .footer-logo-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.footer-tagline {
+  font-size: 0.92rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #444;
+  max-width: 340px;
+}
+
+/* --- Section Headings --- */
+.footer-inner h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--orange-300);
+}
+
+/* --- Lists --- */
+.footer-links ul,
+.footer-services ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-services li {
+  margin-bottom: 0.55rem;
+}
+
+.footer-links a,
+.footer-services a {
+  color: #222;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-links a:hover,
+.footer-services a:hover {
+  color: var(--primary);
+}
+
+/* --- Contact Column --- */
+.footer-contact p,
+.footer-contact a {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  margin-bottom: 0.35rem;
+}
+
+.footer-wa-btn {
+  margin-top: 0.75rem;
+  padding: 0.55rem 1.1rem;
+  background: #25D366;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* --- Divider Style for Columns (subtle) --- */
+.footer-inner > div:not(:first-child) {
+  border-left: 1px solid #e5e5e5;
+  padding-left: 2rem;
+}
+
+/* --- Footer Bottom --- */
+.footer-bottom {
+  border-top: 1px solid #ddd;
+  background: #f1f2f3;
+  padding: 1rem 2rem;
+}
+
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom p {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.footer-brand-name {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* --- Responsive Improvements --- */
+@media (max-width: 992px) {
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .footer-inner > div {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+/* ------------------------------------------------------------------------------------- */
+

@@ -14,7 +14,13 @@
     gap: 2rem;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    /* padding: 1rem 1.5rem; */
+
+    
+/* smaller side padding on phones, larger on large screens */
+ padding: 1rem clamp(12px, 4vw, 32px);
+
+
 }
 
 .header-brand {
@@ -23,6 +29,8 @@
     gap: 0.75rem;
     text-decoration: none;
     flex-shrink: 0;
+
+    /* margin-left: -96px; */
 }
 
 .header-nav-group {
@@ -103,7 +111,7 @@
     color: white;
 }
 
-.header-cta {
+/* .header-cta {
     display: none;
     padding: 0.5rem 1.25rem;
     background: linear-gradient(135deg, var(--primary), var(--orange-600));
@@ -112,7 +120,7 @@
     font-size: 0.8125rem;
     border-radius: 9999px;
     text-decoration: none;
-}
+} */
 
 .header-menu-toggle {
     display: flex;
@@ -186,3 +194,159 @@
         font-size: 1.125rem;
     }
 }
+
+/* ---------------------Logo moved below refresh button of the page Pasted below----------------------- */
+
+/* 1) A couple of variables to keep the math readable */
+:root {
+  /* Must match .header-container max-width */
+  --container-max: 1280px;
+
+  /* How far from the viewport’s edge the logo should sit on desktop */
+  --edge-pad: 56px;
+
+  /* Mirror the horizontal padding you already use on the container */
+  --container-x-pad: clamp(12px, 4vw, 32px);
+}
+
+/* 2) Ensure nothing clips when we let the brand “bleed” left */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: var(--orange-50);
+  overflow: visible;              /* NEW */
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: var(--container-max);                 /* unchanged logic */
+  margin: 0 auto;
+  padding: 1rem var(--container-x-pad);            /* use the variable */
+}
+
+/* 3) Defaults (mobile/tablet): no negative pull */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* 4) Desktop-only: pull the brand left so it sits near the viewport edge */
+@media (min-width: 1280px) {
+  .header-brand {
+    /* 
+      Left gutter of a centered container = (100vw - --container-max)/2.
+      We pull the brand left by that gutter (negative), 
+      then push it right by a small inset (--edge-pad) 
+      and subtract the container's side padding so the visual edge is correct.
+
+      Also include safe-area for devices with notches (no harm on desktop).
+    */
+    margin-left:
+      calc(
+        ((100vw - var(--container-max)) / 2) * -1
+        + max(var(--edge-pad), env(safe-area-inset-left))
+        - var(--container-x-pad)
+      );
+  }
+}
+
+/* 5) (Optional but helpful) Avoid clipping near the edge */
+.header-logo-wrap {
+  overflow: visible;  /* only change; width/height remain as you have them */
+}
+
+/* -----------------------------Logo width increase code------------------------------------- */
+/* === LOGO WIDTH EXPANSION (without changing height values) === */
+
+/* Make the left side able to grow */
+.header-brand {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* Keep the right group pinned */
+.header-nav-group,
+.header-cta {
+  flex-shrink: 0 !important;
+}
+
+/* The wrapper becomes the flexible track for the logo */
+.header-logo-wrap {
+  display: block !important;
+  flex: 1 1 auto !important;      /* track can grow to the right */
+  width: auto !important;         /* not a fixed pixel width */
+  overflow: visible !important;   /* avoid clipping */
+  height: 50px !important;        /* keep your heights EXACTLY as-is */
+}
+
+@media (min-width: 1024px) {
+  .header-logo-wrap { height: 70px !important; }
+}
+@media (min-width: 1280px) {
+  .header-logo-wrap { height: 85px !important; }
+}
+
+/* The image itself should be sized by HEIGHT, not by width */
+.header-logo {
+  display: block !important;
+
+  /* Key change: drive size by height only; let width follow aspect ratio */
+  height: 100% !important;
+  width: 200px !important;
+
+  /* Remove caps that prevent it from widening */
+  max-width: none !important;
+
+  /* Remove contain (it was causing the “letterbox” effect) */
+  object-fit: unset !important;
+
+  /* Keep the logo anchored left; no distortion occurs because width is auto */
+  object-position: left center !important;
+}
+
+/* Keep the “under Refresh button” alignment that you already added */
+@media (min-width: 1280px) {
+  .header-brand {
+    margin-left:
+      calc(
+        ((100vw - var(--container-max)) / 2) * -1
+        + max(var(--edge-pad), env(safe-area-inset-left))
+        - var(--container-x-pad)
+      ) !important;
+  }
+}
+/* --------------------------------------------------Company Name Moving Code--------------------------------------------------- */
+/* === Place "SR Advisory Services" immediately after the logo (no other changes) === */
+
+/* Keep brand as a horizontal row and align middle */
+.header-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;   /* tiny spacing; set to 0 if you want it touching */
+}
+
+/* Ensure the logo block comes first and does not stretch */
+.header-brand .header-logo-wrap {
+  order: 1 !important;
+  flex: 0 0 auto !important;
+}
+
+/* Company name sits right after the logo, single line, no wrapping */
+.header-brand .header-logo-text {
+  order: 2 !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 0 1 auto !important;  /* allow truncation if space is tight */
+  margin-left: 0 !important;  /* ensure it’s immediately after the logo */
+}
+/* ------------------------------To resolve overlap issue code below------------------------------------ */
