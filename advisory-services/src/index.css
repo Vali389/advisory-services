@@ -1666,9 +1666,6 @@ img:not(.header-logo) {
 .service-category-nav {
   background: var(--white);
   padding: 0.75rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 50;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   border-bottom: 1px solid var(--orange-100);
 }

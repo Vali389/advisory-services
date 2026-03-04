@@ -35,15 +35,9 @@ export default function Footer() {
         >
           <div className="footer-logo-wrap">
             <img
-              src="/logo.jpeg"
-              alt="Navasri Tax"
+              src="/image.png"
+              alt="SR Advisory Services"
               className="footer-logo"
-              onError={(e) => {
-                const img = e.target
-                const next = ['/logo.png', '/logo-navasri.png'][parseInt(img.dataset.fb || '0', 10)]
-                if (next) { img.dataset.fb = String(parseInt(img.dataset.fb || '0', 10) + 1); img.src = next }
-                else { img.style.display = 'none' }
-              }}
             />
           </div>
           <span className="footer-logo-text">SR Advisory Services</span>
@@ -65,7 +59,7 @@ export default function Footer() {
           <ul>
             {footerLinks.map(({ to, label }) => (
               <li key={to}>
-                <Link to={to}>{label}</Link>
+                <Link to={to} onClick={() => window.scrollTo(0, 0)}>{label}</Link>
               </li>
             ))}
           </ul>
@@ -83,7 +77,7 @@ export default function Footer() {
           <ul>
             {footerPopularServices.map((svc) => (
               <li key={svc}>
-                <Link to="/services">› {svc}</Link>
+                <Link to="/services" onClick={() => window.scrollTo(0, 0)}>› {svc}</Link>
               </li>
             ))}
           </ul>

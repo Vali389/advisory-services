@@ -7,7 +7,6 @@ const navLinks = [
   { to: '/about', label: 'About Us' },
   { to: '/services', label: 'Services' },
   { to: '/why-choose-us', label: 'Why Choose Us' },
-  { to: '/contact', label: 'Contact' },
 ]
 
 export default function Header() {
@@ -20,12 +19,12 @@ export default function Header() {
         <Link to="/" className="header-brand">
           <span className="header-logo-wrap">
             <img
-              src="/logo.jpeg"
+              src="/image.png"
               alt="SR Advisory Services"
               className="header-logo"
               onError={(e) => {
                 const img = e.target
-                const next = ['/logo.png', '/logo-navasri.png'][parseInt(img.dataset.fb || '0', 10)]
+                const next = ['/logo.jpeg', '/logo.png', '/logo-navasri.png'][parseInt(img.dataset.fb || '0', 10)]
                 if (next) {
                   img.dataset.fb = String(parseInt(img.dataset.fb || '0', 10) + 1)
                   img.src = next
@@ -53,9 +52,12 @@ export default function Header() {
               ))}
             </ul>
           </nav>
-          {/* <Link to="/contact" className="header-cta">
+          <Link
+            to="/contact"
+            className={`header-cta ${location.pathname === '/contact' ? 'active' : ''}`}
+          >
             Contact
-          </Link> */}
+          </Link>
         </div>
 
         <button
@@ -82,6 +84,13 @@ export default function Header() {
               {label}
             </Link>
           ))}
+          <Link
+            to="/contact"
+            className={`header-nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
+            Contact
+          </Link>
         </nav>
       )}
     </header>
