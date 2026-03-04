@@ -2486,6 +2486,7 @@ img:not(.header-logo) {
 .contact-form-row-inline {
   display: grid;
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .contact-form input,
@@ -2557,5 +2558,6 @@ img:not(.header-logo) {
 
   .contact-form-row-inline {
     grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
   }
 }

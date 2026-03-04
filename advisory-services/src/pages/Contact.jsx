@@ -1,7 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
+import toast from 'react-hot-toast'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+
+const EMAILJS_PUBLIC_KEY = 'CoYQcdmjaJ5XWLYg3'
+const EMAILJS_SERVICE_ID = 'service_6z2drdh'
+const EMAILJS_TEMPLATE_ID = 'template_vwpqi9e'
 
 const WHATSAPP_NUMBER = '919063946065'
 const PHONE_DISPLAY = '+91 9063946065'
@@ -15,6 +20,10 @@ export default function Contact() {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY)
+  }, [])
+
   const validateField = (name, value) => {
     let error = ''
     if (name === 'name') {
@@ -24,16 +33,15 @@ export default function Contact() {
       if (!value.trim()) {
         error = 'Please enter your email.'
       } else {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if (!emailPattern.test(value)) error = 'Please enter a valid email address.'
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        if (!emailPattern.test(value.trim())) error = 'Please enter a valid email address.'
       }
     }
     if (name === 'phone') {
       if (!value.trim()) {
         error = 'Please enter your contact number.'
-      } else {
-        const digitsOnly = value.replace(/\D/g, '')
-        if (digitsOnly.length < 10) error = 'Please enter at least 10 digits.'
+      } else if (value.length !== 10) {
+        error = 'Please enter exactly 10 digits.'
       }
     }
     if (name === 'message') {
@@ -44,10 +52,11 @@ export default function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+    const finalValue = name === 'phone' ? value.replace(/\D/g, '') : value
+    setFormData({ ...formData, [name]: finalValue })
     // clear error while typing if it becomes valid
     if (errors[name]) {
-      const newError = validateField(name, value)
+      const newError = validateField(name, finalValue)
       setErrors({ ...errors, [name]: newError })
     }
   }
@@ -85,16 +94,17 @@ export default function Contact() {
     }
 
     emailjs
-      .send('service_gh1f72x', 'template_0hkj701', templateParams)
+      .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
       .then(() => {
         setSubmitted(true)
         setIsSubmitting(false)
         setFormData({ name: '', email: '', phone: '', company: '', message: '' })
         setErrors({})
+        toast.success('Message sent successfully! We\'ll get back to you soon.')
       })
       .catch(() => {
         setIsSubmitting(false)
-        alert('There was a problem sending your message. Please try again or email us directly.')
+        toast.error('Failed to send. Please try again or email us directly.')
       })
   }
 
@@ -223,7 +233,9 @@ export default function Contact() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     required
-                    placeholder="Enter your phone number"
+                    maxLength={10}
+                    inputMode="numeric"
+                    placeholder="Enter 10-digit phone number"
                   />
                   {errors.phone && <p className="field-error">{errors.phone}</p>}
                 </div>
