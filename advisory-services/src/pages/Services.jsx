@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import CountUp from '../components/CountUp'
 
 const servicesList = [
   {
@@ -209,7 +210,7 @@ export default function Services() {
             <div className="services-why-card">
               <span className="services-why-icon">📊</span>
               <h3 className="services-why-title">30+ Years Experience</h3>
-              <p className="services-why-desc">₹1000+ crores processed. Deep expertise in tax, loans & compliance.</p>
+              <p className="services-why-desc">₹1496 Crores processed. Deep expertise in tax, loans & compliance.</p>
             </div>
           </div>
         </div>
@@ -350,15 +351,15 @@ export default function Services() {
         <div className="container">
           <div className="services-stats-grid">
             <div className="services-stat">
-              <span className="services-stat-value">30+</span>
+              <span className="services-stat-value"><CountUp end={30} suffix="+" /></span>
               <span className="services-stat-label">Years Experience</span>
             </div>
             <div className="services-stat">
-              <span className="services-stat-value">₹1000+ Cr</span>
+              <span className="services-stat-value">₹<CountUp end={1496} suffix=" Crores" /></span>
               <span className="services-stat-label">Transactions</span>
             </div>
             <div className="services-stat">
-              <span className="services-stat-value">15+</span>
+              <span className="services-stat-value"><CountUp end={15} suffix="+" /></span>
               <span className="services-stat-label">Services</span>
             </div>
           </div>

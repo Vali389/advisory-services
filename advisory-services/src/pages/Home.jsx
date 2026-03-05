@@ -1,34 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
-import { motion, useInView } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-
-// Animated counter that counts from 1 up to the target
-function CountUp({ end, suffix = '', prefix = '', duration = 1800 }) {
-  const [count, setCount] = useState(1)
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  const started = useRef(false)
-
-  useEffect(() => {
-    if (!inView || started.current) return
-    started.current = true
-    let startTime = null
-    const startVal = 1
-    const endVal = typeof end === 'number' ? end : parseInt(String(end).replace(/[^0-9]/g, ''), 10)
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      // ease-out
-      const eased = 1 - Math.pow(1 - progress, 3)
-      setCount(Math.floor(startVal + (endVal - startVal) * eased))
-      if (progress < 1) requestAnimationFrame(step)
-    }
-    requestAnimationFrame(step)
-  }, [inView, end, duration])
-
-  return <span ref={ref}>{prefix}{count}{suffix}</span>
-}
+import { motion } from 'framer-motion'
+import CountUp from '../components/CountUp'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -89,14 +62,27 @@ export default function Home() {
               Business Growth Starts With The Right Financial & Legal Support
             </h1>
             <p className="hero-subtitle">
-              SR Advisory Services Hyderabad — Your one-stop solution for loans, tax compliance, registrations, and business consulting. Led by G Subramanya Sarma with 30+ years of expertise and ₹1000+ crores processed for clients across India and overseas.
+              SR Advisory Services Hyderabad — Your one-stop solution for loans, tax compliance, registrations, and business consulting. Led by G Subramanya Sarma with 30+ years of expertise and ₹1496 Crores processed for clients across India and overseas.
             </p>
             <div className="hero-cta">
               <Link to="/services" className="btn btn-primary">Our Services</Link>
               <Link to="/contact" className="btn btn-outline">Contact Us</Link>
             </div>
           </div>
-          {/* hero-visual intentionally empty; brand block shown below */}
+          <div className="hero-visual">
+            <div className="hero-spinner">
+              <div className="hero-spinner-hub">
+                <span className="hero-spinner-hub-text">Your Growth Partner — Loans • Tax • Finance • Services</span>
+              </div>
+              <div className="hero-spinner-stick" aria-hidden="true" />
+              <div className="hero-spinner-branches">
+                <div className="hero-spinner-branch"><span>Loans</span></div>
+                <div className="hero-spinner-branch"><span>Tax</span></div>
+                <div className="hero-spinner-branch"><span>Services</span></div>
+                <div className="hero-spinner-branch"><span>Finance</span></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="hero-scroll">
           <span className="hero-scroll-dot" />
@@ -157,8 +143,8 @@ export default function Home() {
               </div>
               <div className="popular-pf-footer">
                 <div className="popular-pf-stats">
-                  <span className="popular-pf-stat"><strong>30+</strong> Years</span>
-                  <span className="popular-pf-stat"><strong>₹1000+ Cr</strong> Processed</span>
+                  <span className="popular-pf-stat"><strong><CountUp end={30} suffix="+" /></strong> Years</span>
+                  <span className="popular-pf-stat"><strong>₹<CountUp end={1496} suffix=" Crores" /></strong> Processed</span>
                 </div>
                 <span className="popular-pf-cta">Explore Project Finance →</span>
               </div>
@@ -206,7 +192,7 @@ export default function Home() {
               <span className="trust-label">Years Experience</span>
             </div>
             <div className="trust-card">
-              <span className="trust-value">₹<CountUp end={1000} suffix="+ Cr" /></span>
+              <span className="trust-value">₹<CountUp end={1496} suffix=" Crores" /></span>
               <span className="trust-label">Transactions Processed</span>
             </div>
             <div className="trust-card">
@@ -273,7 +259,7 @@ export default function Home() {
               <span className="alt-label">Who We Are</span>
               <h2 className="alt-title">Led by a Veteran with 30+ Years of Expertise</h2>
               <p className="alt-text">
-                <strong>G Subramanya Sarma</strong> leads SR Advisory Services with deep knowledge in taxation, finance, and regulatory compliance. Having successfully handled transactions worth <strong>₹1000+ crores</strong>, we serve clients both in India and overseas across direct and indirect taxation, funding support, and legal financial services.
+                <strong>G Subramanya Sarma</strong> leads SR Advisory Services with deep knowledge in taxation, finance, and regulatory compliance. Having successfully handled transactions worth <strong>₹1496 Crores</strong>, we serve clients both in India and overseas across direct and indirect taxation, funding support, and legal financial services.
               </p>
               <Link to="/about" className="btn btn-primary">Learn More About Us</Link>
             </div>

@@ -241,6 +241,166 @@ img:not(.header-logo) {
   filter: brightness(0) invert(1);
 }
 
+/* Hero spinner - fan style: fixed stick, rotating branches like fan blades */
+.hero-spinner {
+  position: relative;
+  width: 300px;
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 2.5rem;
+}
+
+.hero-spinner-hub {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 56px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 100%);
+  border: 2px solid rgba(255,255,255,0.6);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  z-index: 4;
+}
+
+.hero-spinner-hub-text {
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: var(--orange-900);
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.hero-spinner-stick {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 340px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0.7) 100%);
+  border-radius: 7px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.5);
+  z-index: 1;
+}
+
+.hero-spinner-branches {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 240px;
+  animation: heroSpinnerRotate 10s linear infinite;
+  z-index: 2;
+}
+
+.hero-spinner-branches::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+  z-index: 2;
+}
+
+.hero-spinner-branch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 95px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 100%);
+  border-radius: 11px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.4);
+  transform-origin: center bottom;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.hero-spinner-branch span {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--orange-900);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  display: block;
+}
+
+.hero-spinner-branch:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+.hero-spinner-branch:nth-child(2) { transform: translate(-50%, -100%) rotate(90deg); }
+.hero-spinner-branch:nth-child(3) { transform: translate(-50%, -100%) rotate(180deg); }
+.hero-spinner-branch:nth-child(4) { transform: translate(-50%, -100%) rotate(270deg); }
+
+@keyframes heroSpinnerRotate {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+@media (min-width: 900px) {
+  .hero-spinner {
+    width: 360px;
+    height: 400px;
+    margin-top: 3rem;
+  }
+
+  .hero-spinner-hub {
+    width: 160px;
+    height: 64px;
+    padding: 0 14px;
+  }
+
+  .hero-spinner-hub-text {
+    font-size: 0.6rem;
+  }
+
+  .hero-spinner-stick {
+    height: 400px;
+    width: 16px;
+  }
+
+  .hero-spinner-branches {
+    width: 300px;
+    height: 300px;
+    bottom: 250px;
+    animation-duration: 8s;
+  }
+
+  .hero-spinner-branches::before {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero-spinner-branch {
+    width: 26px;
+    height: 120px;
+    padding-top: 10px;
+  }
+
+  .hero-spinner-branch span {
+    font-size: 0.8125rem;
+  }
+}
+
 @media (min-width: 900px) {
   .hero-with-image .hero-inner {
     grid-template-columns: 1fr auto;
@@ -278,6 +438,7 @@ img:not(.header-logo) {
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1.5rem;
   line-height: 1.65;
+  text-align: justify;
 }
 
 .hero-cta {
@@ -422,6 +583,7 @@ img:not(.header-logo) {
   color: var(--text);
   line-height: 1.65;
   margin-bottom: 1rem;
+  text-align: justify;
 }
 
 .popular-pf-benefits {
@@ -555,6 +717,7 @@ img:not(.header-logo) {
   line-height: 1.6;
   margin-bottom: 1rem;
   flex-grow: 1;
+  text-align: justify;
 }
 
 .popular-service-cta {
@@ -706,6 +869,7 @@ img:not(.header-logo) {
   color: var(--text);
   line-height: 1.7;
   margin-bottom: 1rem;
+  text-align: justify;
 }
 
 .alt-text:last-of-type {
@@ -782,6 +946,7 @@ img:not(.header-logo) {
   line-height: 1.7;
   color: var(--text);
   margin-bottom: 1rem;
+  text-align: justify;
 }
 
 .section-gateway .section-cta {
@@ -932,6 +1097,7 @@ img:not(.header-logo) {
   color: var(--text-muted);
   margin-bottom: 1rem;
   line-height: 1.5;
+  text-align: justify;
 }
 
 .service-card-list {
@@ -1009,6 +1175,7 @@ img:not(.header-logo) {
   line-height: 1.75;
   color: var(--text);
   margin-bottom: 1.5rem;
+  text-align: justify;
 }
 
 .about-preview-image {
@@ -1281,8 +1448,8 @@ img:not(.header-logo) {
 }
 
 .founder-block img {
-  width: 200px;
-  height: 260px;
+  width: 220px;
+  height: 320px;
   object-fit: cover;
   border-radius: 10px;
   border: 4px solid var(--orange-200);
@@ -1309,7 +1476,7 @@ img:not(.header-logo) {
 
 @media (min-width: 768px) {
   .about-with-founder {
-    grid-template-columns: 1fr 220px;
+    grid-template-columns: 1fr 240px;
   }
 
   .founder-block {
@@ -1385,6 +1552,7 @@ img:not(.header-logo) {
   line-height: 1.7;
   color: var(--text);
   margin-bottom: 1rem;
+  text-align: justify;
 }
 
 .founder-quote footer {
@@ -1575,6 +1743,7 @@ img:not(.header-logo) {
   margin-bottom: 1rem;
   color: var(--text);
   line-height: 1.7;
+  text-align: justify;
 }
 
 .about-cta {
@@ -1754,6 +1923,7 @@ img:not(.header-logo) {
   font-weight: 600;
   color: var(--text-muted);
   line-height: 1.55;
+  text-align: justify;
 }
 
 @media (min-width: 768px) {
@@ -2104,6 +2274,7 @@ img:not(.header-logo) {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-align: justify;
 }
 
 .service-detail-points {

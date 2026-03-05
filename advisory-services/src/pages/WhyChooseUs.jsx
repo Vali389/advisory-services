@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+import CountUp from '../components/CountUp'
 
 const reasons = [
   '3 decades of industry expertise',
@@ -34,11 +35,11 @@ export default function WhyChooseUs() {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <span className="stat-value">30+</span>
+              <span className="stat-value"><CountUp end={30} suffix="+" /></span>
               <span className="stat-label">Years Expertise</span>
             </div>
             <div className="stat-item">
-              <span className="stat-value">₹1000+ Cr</span>
+              <span className="stat-value">₹<CountUp end={1496} suffix=" Crores" /></span>
               <span className="stat-label">Processed</span>
             </div>
             <div className="stat-item">

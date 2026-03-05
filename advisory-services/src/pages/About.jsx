@@ -1,12 +1,13 @@
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+import CountUp from '../components/CountUp'
 
 export default function About() {
   return (
     <>
       <Helmet>
         <title>About Us | SR Advisory Services & Navasri Tax - Your Growth Partner</title>
-        <meta name="description" content="SR Advisory Services was promoted by G Subramanya Sarma in 2017. 30+ years in finance, direct & indirect taxes, India and abroad. ₹1000+ crores processed. Navasri Tax - trusted advisor for businesses." />
+        <meta name="description" content="SR Advisory Services was promoted by G Subramanya Sarma in 2017. 30+ years in finance, direct & indirect taxes, India and abroad. ₹1496 Crores processed. Navasri Tax - trusted advisor for businesses." />
         <link rel="canonical" href="https://sradvisoryservices.com/about" />
       </Helmet>
 
@@ -25,15 +26,15 @@ export default function About() {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <span className="stat-value">30+</span>
+              <span className="stat-value"><CountUp end={30} suffix="+" /></span>
               <span className="stat-label">Years Experience</span>
             </div>
             <div className="stat-item">
-              <span className="stat-value">₹1000+ Cr</span>
+              <span className="stat-value">₹<CountUp end={1496} suffix=" Crores" /></span>
               <span className="stat-label">Transactions Processed</span>
             </div>
             <div className="stat-item">
-              <span className="stat-value">2017</span>
+              <span className="stat-value"><CountUp end={2017} start={2000} /></span>
               <span className="stat-label">Founded</span>
             </div>
           </div>
@@ -49,7 +50,7 @@ export default function About() {
                 SR Advisory Services was promoted by <strong>G Subramanya Sarma</strong> during the year 2017. Our reputation is our most treasured quality of service and the foundation on which we have built our company.
               </p>
               <p>
-                Subramanya Sarma has <strong>30+ years of experience</strong> in the field of Finance, Direct and indirect taxes, having worked in India and abroad. He has a unique identity of processing <strong>Rs. 1000+ crores</strong> for various companies in India.
+                Subramanya Sarma has <strong>30+ years of experience</strong> in the field of Finance, Direct and indirect taxes, having worked in India and abroad. He has a unique identity of processing <strong>₹1496 Crores</strong> for various companies in India.
               </p>
               <h2 className="content-heading">Our Commitment</h2>
               <p>
